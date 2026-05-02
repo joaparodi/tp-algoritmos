@@ -1,6 +1,6 @@
 
 from random import randint
-from queue_ import Queue
+from queue import Queue
 
 # EJERCICIO 20
 #Desarrollar un algoritmo para el control de un puesto de peaje (que posee 3 cabinas de cobro),
