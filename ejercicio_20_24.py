@@ -51,3 +51,99 @@ pila.show()
 
 #c. determinar en cuantas películas participo la Viuda Negra (Black Widow);
 #d. mostrar todos los personajes cuyos nombre empiezan con C, D y G.
+
+
+from stack import Stack
+
+
+pila = Stack()
+
+personajes = [
+    ("Iron Man", 10),
+    ("Capitán América", 5),
+    ("Thor", 8),
+    ("Hulk", 7),
+    ("Viuda Negra", 7),
+    ("Ojo de Halcón", 6),
+    ("Doctor Strange", 4),
+    ("Groot", 5),
+    ("Rocket Raccoon", 6),
+    ("Gamora", 4),
+    ("Drax", 4),
+    ("Capitana Marvel", 3),
+    ("Wanda", 6),
+    ("Visión", 4),
+    ("Ant-Man", 4),
+]
+
+for nombre, peliculas in personajes:
+    pila.push((nombre, peliculas))
+
+print()
+pila.show()
+print()
+
+# a. Posicion de Rocket Raccoon y Groot
+print("a. Posición de Rocket Raccoon y Groot:")
+pila_aux = Stack()
+posicion = 1
+
+while pila.size() > 0:
+    nombre, peliculas = pila.pop()
+    if nombre == "Rocket Raccoon":
+        print(f"   Rocket Raccoon está en la posición {posicion}")
+    if nombre == "Groot":
+        print(f"   Groot está en la posición {posicion}")
+    posicion += 1
+    pila_aux.push((nombre, peliculas))
+
+while pila_aux.size() > 0:
+    pila.push(pila_aux.pop())
+
+print()
+
+# b. Personajes con más de 5 películas
+print("b. Personajes con más de 5 películas:")
+pila_aux = Stack()
+
+while pila.size() > 0:
+    nombre, peliculas = pila.pop()
+    if peliculas > 5:
+        print(f"   {nombre} - {peliculas} películas")
+    pila_aux.push((nombre, peliculas))
+
+while pila_aux.size() > 0:
+    pila.push(pila_aux.pop())
+
+print()
+
+# c. Películas de Viuda Negra
+print("c. Películas de Viuda Negra:")
+pila_aux = Stack()
+
+while pila.size() > 0:
+    nombre, peliculas = pila.pop()
+    if nombre == "Viuda Negra":
+        print(f"   Viuda Negra participó en {peliculas} películas")
+    pila_aux.push((nombre, peliculas))
+
+while pila_aux.size() > 0:
+    pila.push(pila_aux.pop())
+
+print()
+
+# d. Personajes que empiezan con C, D o G
+print("d. Personajes que empiezan con C, D o G:")
+pila_aux = Stack()
+
+while pila.size() > 0:
+    nombre, peliculas = pila.pop()
+    if nombre[0] in ("C", "D", "G"):
+        print(f"   {nombre}")
+    pila_aux.push((nombre, peliculas))
+
+while pila_aux.size() > 0:
+    pila.push(pila_aux.pop())
+    
+    
+    
