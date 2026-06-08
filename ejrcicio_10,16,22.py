@@ -55,9 +55,17 @@ def mostrar_twitter_python(cola):
         cola.arrive(aux.attention())
 
 
-def contar_rango_horas(cola):
+def procesar_rango_horas(cola):
     inicio = '11:43'
     fin = '15:57'
+
+    hora_inicio = int(inicio[0:2])
+    minuto_inicio = int(inicio[3:5])
+    hora_fin = int(fin[0:2])
+    minuto_fin = int(fin[3:5])
+
+    horas_totales = hora_fin - hora_inicio
+    minutos_totales = minuto_fin - minuto_inicio
 
     aux = Queue()
     pila = Stack()
@@ -76,15 +84,28 @@ def contar_rango_horas(cola):
     while aux.size() > 0:
         cola.arrive(aux.attention())
 
-    return contador
+    return contador, pila, horas_totales, minutos_totales
 
 
-
-print('Cola original:')
+print('COLA ORIGINAL')
 cola.show()
 
-print('Notificaciones de Twitter con Python:')
+print('Eliminando Facebook')
+eliminar_facebook(cola)
+
+print('Twitter + Python')
 mostrar_twitter_python(cola)
 
-contador = contar_rango_horas(cola)
-print(f"Notificaciones entre 11:43 y 15:57: {contador}")
+print('Rango de horas y pila temporal')
+cant_notificaciones, pila_notificaciones, hs, mins = procesar_rango_horas(cola)
+print(f"Cantidad de notificaciones entre 11:43 y 15:57: {cant_notificaciones}")
+print(f"Intervalo de tiempo: {hs} horas y {mins} minutos")
+print('Notificaciones almacenadas temporalmente en la pila:')
+pila_notificaciones.show()
+
+print('COLA FINAL')
+cola.show()
+
+
+
+
