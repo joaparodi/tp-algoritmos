@@ -37,18 +37,26 @@ print(romano_a_decimal("xvi"))
 
 #c. Utilizar un vector para representar la mochila.
 
-def usar_la_fuerza(mochila, i=0):
+
+mochila = ["comida", "mapa","sable de luz", "ropa"]#anotacion para mi= vector que representa la mochila
+
+
+def usar_la_fuerza(mochila , i=0):
     # Caso base: no quedan objetos
     if i >= len(mochila): #len()es la cantidad de elementos del vector
         return False, 0
 
     # Si encuentra el sable de luz
     if mochila[i] == "sable de luz":
-        return True, 1
+        return True, i + 1
+    else:
+        return usar_la_fuerza(mochila , i + 1)
 
-    # Caso recursivo: sigue buscando
-    encontrado, cantidad = usar_la_fuerza(mochila, i + 1)
-    return encontrado, cantidad + 1
+encontrado , pos = usar_la_fuerza(mochila)
 
-mochila = ["comida", "mapa", "sable de luz", "ropa"]#anotacion para mi= vector que representa la mochila
-print(usar_la_fuerza(mochila))
+if encontrado:
+    print("se encontro el sable")
+else:
+    print("no se encontro el sable de luz")
+    
+#print(usar_la_fuerza(mochila)
