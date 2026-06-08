@@ -20,7 +20,7 @@ def romano_a_decimal( romano):
             return valores[romano[i]] + convertir(i + 1)
     return convertir(0)
 
-print(romano_a_decimal("xvi"))
+print(romano_a_decimal("xiv"))
 
 
 
