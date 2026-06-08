@@ -53,37 +53,38 @@ pila.show()
 #d. mostrar todos los personajes cuyos nombre empiezan con C, D y G.
 
 
+from random import randint
 from stack import Stack
 
 
 pila = Stack()
 
 personajes = [
-    ("Iron Man", 10),
-    ("Capitán América", 5),
-    ("Thor", 8),
-    ("Hulk", 7),
-    ("Viuda Negra", 7),
-    ("Ojo de Halcón", 6),
-    ("Doctor Strange", 4),
-    ("Groot", 5),
-    ("Rocket Raccoon", 6),
-    ("Gamora", 4),
-    ("Drax", 4),
-    ("Capitana Marvel", 3),
-    ("Wanda", 6),
-    ("Visión", 4),
-    ("Ant-Man", 4),
+    "Iron Man",
+    "Capitán América",
+    "Thor",
+    "Hulk",
+    "Viuda Negra",
+    "Ojo de Halcón",
+    "Doctor Strange",
+    "Groot",
+    "Rocket Raccoon",
+    "Gamora",
+    "Drax",
+    "Capitana Marvel",
+    "Wanda",
+    "Visión",
+    "Ant-Man",
 ]
 
-for nombre, peliculas in personajes:
-    pila.push((nombre, peliculas))
+for nombre in personajes:
+    pila.push((nombre, randint(1, 10)))
 
 print()
 pila.show()
 print()
 
-# a. Posicion de Rocket Raccoon y Groot
+# a. Posición de Rocket Raccoon y Groot
 print("a. Posición de Rocket Raccoon y Groot:")
 pila_aux = Stack()
 posicion = 1
@@ -99,7 +100,6 @@ while pila.size() > 0:
 
 while pila_aux.size() > 0:
     pila.push(pila_aux.pop())
-
 print()
 
 # b. Personajes con más de 5 películas
@@ -114,7 +114,6 @@ while pila.size() > 0:
 
 while pila_aux.size() > 0:
     pila.push(pila_aux.pop())
-
 print()
 
 # c. Películas de Viuda Negra
@@ -129,7 +128,6 @@ while pila.size() > 0:
 
 while pila_aux.size() > 0:
     pila.push(pila_aux.pop())
-
 print()
 
 # d. Personajes que empiezan con C, D o G
