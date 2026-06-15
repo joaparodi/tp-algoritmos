@@ -25,8 +25,8 @@ notificacion =(
     {'hora': '15:00', 'app': 'Instagram', 'mensaje': 'A @usuario le gustó tu foto'},
     {'hora': '16:00', 'app': 'Twitter', 'mensaje': 'Día de descanso'})
 
-for i in notificacion:
-    cola.arrive(i)
+# for i in notificacion:
+#     cola.arrive(i)
 
 #cola.show()
 
@@ -87,24 +87,116 @@ def procesar_rango_horas(cola):
     return contador, pila, horas_totales, minutos_totales
 
 
-print('COLA ORIGINAL')
-cola.show()
+# print('COLA ORIGINAL')
+# cola.show()
 
-print('Eliminando Facebook')
-eliminar_facebook(cola)
+# print('Eliminando Facebook')
+# eliminar_facebook(cola)
 
-print('Twitter + Python')
-mostrar_twitter_python(cola)
+# print('Twitter + Python')
+# mostrar_twitter_python(cola)
 
-print('Rango de horas y pila temporal')
-cant_notificaciones, pila_notificaciones, hs, mins = procesar_rango_horas(cola)
-print(f"Cantidad de notificaciones entre 11:43 y 15:57: {cant_notificaciones}")
-print(f"Intervalo de tiempo: {hs} horas y {mins} minutos")
-print('Notificaciones almacenadas temporalmente en la pila:')
-pila_notificaciones.show()
+# print('Rango de horas y pila temporal')
+# cant_notificaciones, pila_notificaciones, hs, mins = procesar_rango_horas(cola)
+# print(f"Cantidad de notificaciones entre 11:43 y 15:57: {cant_notificaciones}")
+# print(f"Intervalo de tiempo: {hs} horas y {mins} minutos")
+# print('Notificaciones almacenadas temporalmente en la pila:')
+# pila_notificaciones.show()
 
-print('COLA FINAL')
-cola.show()
+# print('COLA FINAL')
+# cola.show()
+
+
+
+# 22. Se tienen una cola con personajes de Marvel Cinematic Universe (MCU), de los cuales se cono-
+# ce el nombre del personaje, el nombre del superhéroe y su género (Masculino M y Femenino
+
+# F) –por ejemplo {Tony Stark, Iron Man, M}, {Steve Rogers, Capitán América, M}, {Natasha Ro-
+# manoff, Black Widow, F}, etc., desarrollar un algoritmo que resuelva las siguientes actividades:
+
+# a. determinar el nombre del personaje de la superhéroe Capitana Marvel;
+# b. mostrar los nombre de los superhéroes femeninos;
+# c. mostrar los nombres de los personajes masculinos;
+# d. determinar el nombre del superhéroe del personaje Scott Lang;
+# e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan
+# con la letra S;
+# f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre
+# de superhéroes.
+
+
+cola = Queue()
+
+class personajes:
+    
+    def __init__(self,nombre,alias,genero):
+        self.nombre=nombre
+        self.alias=alias
+        self.genero=genero
+    
+    def __str__(self):
+
+        return (f"{self.nombre}--{self.alias}--{self.genero}")
+    
+
+
+datos = [
+    {"personaje": "Tony Stark", "superheroe": "Iron Man", "genero": "M"},
+    {"personaje": "Steve Rogers", "superheroe": "Capitan America", "genero": "M"},
+    {"personaje": "Natasha Romanoff", "superheroe": "Black Widow", "genero": "F"},
+    {"personaje": "Carol Danvers", "superheroe": "Capitana Marvel", "genero": "F"},
+    {"personaje": "Scott Lang", "superheroe": "Ant-Man", "genero": "M"},
+    {"personaje": "Sharon Carter", "superheroe": "Agent 13", "genero": "F"}
+]
+
+cola = Queue()
+
+def cargar(cola: Queue ,lista_datos):
+    
+    for d in lista_datos:
+        nuevo_p = personajes(d["personaje"], d["superheroe"], d["genero"])
+        cola.arrive(nuevo_p)
+
+
+
+cargar(cola,datos)
+# cola.show()
+
+# a. determinar el nombre del personaje de la superhéroe Capitana Marvel;
+
+def n_capitanamarvel(cola: Queue):
+    print("el nombre de la capitana marvel es:")
+    
+    for i in range(cola.size()):
+        buscado = cola.on_front()
+        
+        if buscado.alias == "Capitana Marvel":
+         print(buscado.nombre)
+        cola.move_to_end()
+
+n_capitanamarvel(cola)
+# cola.show()
+
+# b. mostrar los nombre de los superhéroes femeninos;
+
+def sup_f(cola: Queue):
+    print("nombres de los personajes femeninos:")
+    for i in range(cola.size()):
+        femen = cola.on_front()
+        if femen.genero == "F":
+            print(femen.nombre)
+        cola.move_to_end()
+
+sup_f(cola)
+#cola.show
+
+# c. mostrar los nombres de los personajes masculinos;
+
+def nom_m(cola: Queue):
+    print("nombre de personajes masculinos:")
+    
+
+
+
 
 
 
