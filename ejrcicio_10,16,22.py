@@ -118,10 +118,8 @@ def procesar_rango_horas(cola):
 # b. mostrar los nombre de los superhéroes femeninos;
 # c. mostrar los nombres de los personajes masculinos;
 # d. determinar el nombre del superhéroe del personaje Scott Lang;
-# e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan
-# con la letra S;
-# f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre
-# de superhéroes.
+# e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan con la letra S;
+# f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre de superhéroes.
 
 
 cola = Queue()
@@ -143,10 +141,16 @@ datos = [
     {"personaje": "Tony Stark", "superheroe": "Iron Man", "genero": "M"},
     {"personaje": "Steve Rogers", "superheroe": "Capitan America", "genero": "M"},
     {"personaje": "Natasha Romanoff", "superheroe": "Black Widow", "genero": "F"},
-    {"personaje": "Carol Danvers", "superheroe": "Capitana Marvel", "genero": "F"},
+    {"personaje": "Carol Danvers", "superheroe": "Capitana Marvel", "genero": "F"},  
     {"personaje": "Scott Lang", "superheroe": "Ant-Man", "genero": "M"},
     {"personaje": "Sharon Carter", "superheroe": "Agent 13", "genero": "F"}
-]
+ ]
+#lista para comprobar en caso de que no halla personajes con s
+# datos =[
+#     {"personaje": "Natasha Romanoff", "superheroe": "Black Widow", "genero": "F"},
+#     {"personaje": "Carol Danvers", "superheroe": "Capitana Marvel", "genero": "F"},
+#     {"personaje": "Tony Stark", "superheroe": "Iron Man", "genero": "M"}
+# ]
 
 cola = Queue()
 
@@ -159,7 +163,7 @@ def cargar(cola: Queue ,lista_datos):
 
 
 cargar(cola,datos)
-# cola.show()
+cola.show()
 
 # a. determinar el nombre del personaje de la superhéroe Capitana Marvel;
 
@@ -193,11 +197,68 @@ sup_f(cola)
 
 def nom_m(cola: Queue):
     print("nombre de personajes masculinos:")
+    for i in range(cola.size()):
+        mascu = cola.on_front()
+        if mascu.genero == "M":
+            print(mascu.nombre)
+        cola.move_to_end()
+
+nom_m(cola)
+#cola.show()
+
+
+# d. determinar el nombre del superhéroe del personaje Scott Lang;
+
+def n_scott(cola: Queue):
+    print("el nombre de superheroe de scott lang es:")
+    for i in range(cola.size()):
+        supscott = cola.on_front()
+        if supscott.nombre == "Scott Lang":
+            print(supscott.alias)
+        cola.move_to_end()
+
+n_scott(cola)
+
+
+# e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan con la letra S;
+
+def nom_con_s(cola: Queue):
+    lista_encontrados = [] # Iniciamos una lista vacía
     
+    for i in range(cola.size()):
+        nom_s = cola.on_front()
+        if nom_s.nombre[0] == ("S"):
+            lista_encontrados.append(nom_s) # Guardamos cada coincidencia
+        cola.move_to_end()
+        
+    return lista_encontrados
+
+resultados = nom_con_s(cola)
+
+if len(resultados) > 0:
+    print("Personajes que empiezan con S:")
+    for p in resultados:
+        print(p) # Esto llamará automáticamente al __str__ de tu clase
+else:
+    print("No se encontraron personajes cuyos nombres empiecen con S.")
+
+# f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre de superhéroes.
+
+def indi_carol(cola: Queue):
+    encontrado = None
+    print("verificacion de personaje carol danvers")
+    for i in range(cola.size()):
+        nom_bus = cola.on_front()
+        if nom_bus.nombre == "Carol Danvers":
+            encontrado = nom_bus.alias
+        cola.move_to_end()
+    return encontrado
 
 
+resultado = indi_carol(cola)
 
-
-
-
+if resultado:
+    print(f"Se encontró a Carol Danvers. Su nombre de superhéroe es: {resultado}")
+else:
+    print("No se encontró a Carol Danvers en la cola.")
 
