@@ -143,5 +143,3 @@ while pila.size() > 0:
 while pila_aux.size() > 0:
     pila.push(pila_aux.pop())
     
-    
-    
