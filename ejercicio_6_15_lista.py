@@ -99,19 +99,45 @@ class Pokemon:
         return (f"Nombre: {self.nombre}, Nivel: {self.nivel}, Tipo: {self.tipo}, Subtipo: {self.subtipo}")
 
 
+
+def by_poke_name(item):
+    return item.nombre
+
+
 lista_p = List()
 lista = List()
 
-def cargar_entrenadores(lista: List):
-    for entrenador in Entrenadores:
-        lista.append(Entrenador(entrenador["nombre"], entrenador["torneos_ganados"], entrenador["batallas_perdidas"], entrenador["batallas_ganadas"], [Pokemon(pokemon["nombre"], pokemon["nivel"], pokemon["tipo"], pokemon["subtipo"]) for pokemon in entrenador["pokemons"]]))
+lista_p.add_criterion('nombre', by_poke_name)
+
 
 def cargar_pokemones(lista_p: List):
-    for pokemon in Pokemons:
-        lista_p.append(Pokemon(pokemon["nombre"], pokemon["nivel"], pokemon["tipo"], pokemon["subtipo"]))
+    for p in Pokemons:
+        lista_p.append(Pokemon(p["nombre"], p["nivel"], p["tipo"], p["subtipo"]))
 
-cargar_entrenadores(lista)
+def cargar_entrenadores(lista: List, lista_p: List):
+    for e in Entrenadores:
+        pokemons_entrenador = List()
+        
+        # Buscamos cada Pokémon en lista_p usando la búsqueda binaria de tu clase List
+        for nombre_pokemon in e["pokemons"]:
+            idx = lista_p.search(nombre_pokemon, 'nombre')
+            if idx is not None:
+                pokemons_entrenador.append(lista_p[idx])
+            
+        lista.append(
+            Entrenador(
+                e["nombre"],
+                e["torneos_ganados"],
+                e["batallas_perdidas"],
+                e["batallas_ganadas"],
+                pokemons_entrenador
+            )
+        )
+
 cargar_pokemones(lista_p)
+cargar_entrenadores(lista, lista_p)
+
+
 lista.show()
 
 
