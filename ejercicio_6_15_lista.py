@@ -115,4 +115,87 @@ cargar_pokemones(lista_p)
 lista.show()
 
 
+# a. obtener la cantidad de Pokémons de un determinado entrenador;
+print()
+print()
+
+def by_name(item):
+    return item.nombre
+
+lista.add_criterion('nombre', by_name)
+
+
+index=lista.search("Ash",'nombre')
+
+if index is not None:
+    entrenador = lista[index]
+    print(f"--- Pokémon de {entrenador.nombre} ---")
+    
+    # Recorremos e imprimimos cada Pokémon de su lista
+    for pokemon in entrenador.pokemons:
+        print(pokemon)
+
+print()
+if index is not None:
+    print(f"Cantidad de Pokémons de {lista[index].nombre}: {len(lista[index].pokemons)}")
+else:
+    print("Entrenador no encontrado")
+
+
+
+# b. listar los entrenadores que hayan ganado más de tres torneos;
+
+def entrenadores_mas_de_tres_torneos(lista: List) -> List:
+    resultado = List()
+    for i in range(lista.size()):
+        if lista[i].torneos_ganados > 3:
+            resultado.append(lista[i])
+    return resultado
+
+
+ganadores = entrenadores_mas_de_tres_torneos(lista)
+ganadores.show() 
+print()
+
+
+# c. el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados;
+
+def pokemon_mayor_nivel_entrenador(lista: List):
+    max_torneos = -1
+    entrenador_max = None
+    
+    for i in range(lista.size()):
+        if lista[i].torneos_ganados > max_torneos:
+            max_torneos = lista[i].torneos_ganados
+            entrenador_max = lista[i]
+    
+    if entrenador_max is not None:
+        max_nivel = -1
+        pokemon_max = None
+        
+        for pokemon in entrenador_max.pokemons:
+            if pokemon.nivel > max_nivel:
+                max_nivel = pokemon.nivel
+                pokemon_max = pokemon
+        
+        return pokemon_max
+    return None
+
+
+
+pokemon_mayor = pokemon_mayor_nivel_entrenador(lista)
+if pokemon_mayor is not None:   
+    print(f"Pokémon de mayor nivel del entrenador con más torneos ganados: {pokemon_mayor}")
+else:
+    print("No se encontró un entrenador con torneos ganados.")
+
+
+
+
+
+
+
+
+
+
 

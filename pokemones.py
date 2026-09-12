@@ -24,10 +24,10 @@ Pokemons = [
         "subtipo": None
     },
     {
-        "nombre": "Pikachu",
-        "nivel": 20,
-        "tipo": "Eléctrico",
-        "subtipo": None
+       "nombre": "Gengar",
+        "nivel": 48,
+        "tipo": "Fantasma",
+        "subtipo": "Veneno"
     },
     {
         "nombre": "Wingull",
