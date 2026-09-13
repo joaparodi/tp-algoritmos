@@ -352,6 +352,70 @@ else:
 
 # j. determinar los entrenadores que tengan uno de los siguientes Pokémons: Tyrantrum, Terrakion o Wingull;
 
+def entrenadores_con_pokemons_especificos(lista: List) -> List:
+    resultado = List()
+    objetivos = ["tyrantrum", "terrakion", "wingull"]
+    
+    for i in range(lista.size()):
+        entrenador = lista[i]
+        tiene_objetivo = False
+        
+        for j in range(entrenador.pokemons.size()):
+            nombre_poke = entrenador.pokemons[j].nombre.strip().lower()
+            if nombre_poke in objetivos:
+                tiene_objetivo = True
+                break  
+                
+        if tiene_objetivo:
+            resultado.append(entrenador)
+            
+    return resultado
+
+
+
+print()
+entrenadores_especificos = entrenadores_con_pokemons_especificos(lista)
+
+if entrenadores_especificos.size() > 0:
+    print("Entrenadores que tienen a Tyrantrum, Terrakion o Wingull ")
+    entrenadores_especificos.show()
+else:
+    print("Ningún entrenador posee a Tyrantrum, Terrakion o Wingull.")
+
+
+# k. Determinar si un entrenador "X" tiene al Pokémon "Y" y mostrar los datos de ambos
+
+def buscar_entrenador_y_pokemon(lista: List, nombre_entrenador: str, nombre_pokemon: str):
+    pos_entrenador = lista.search(nombre_entrenador, 'nombre_insensitive')
+    
+    if pos_entrenador is not None:
+        entrenador = lista[pos_entrenador]
+        nombre_poke_clean = nombre_pokemon.strip().lower()
+        
+        for j in range(entrenador.pokemons.size()):
+            poke = entrenador.pokemons[j]
+            if poke.nombre.strip().lower() == nombre_poke_clean:
+                return entrenador, poke  
+                
+    return None, None
+
+
+
+print()
+entrenador_nombre = input("Ingrese el nombre del entrenador: ")
+pokemon_nombre = input("Ingrese el nombre del Pokémon: ")
+
+entrenador_hallado, pokemon_hallado = buscar_entrenador_y_pokemon(lista, entrenador_nombre, pokemon_nombre)
+
+if entrenador_hallado is not None and pokemon_hallado is not None:
+    print("¡Coincidencia encontrada!")
+    print("Datos del Entrenador")
+    print(entrenador_hallado)
+    print("Datos del Pokémon")
+    print(pokemon_hallado)
+else:
+    print(f"El entrenador '{entrenador_nombre}' NO tiene al Pokémon '{pokemon_nombre}' (o el entrenador no existe).")
+
 
 
 
