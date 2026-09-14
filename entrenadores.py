@@ -4,7 +4,7 @@ Entrenadores = [
         "torneos_ganados": 5,
         "batallas_ganadas": 85,
         "batallas_perdidas": 15,
-        "pokemons": ["Pikachu", "Charizard", "Bulbasaur", "Gengar"]
+        "pokemons": ["Pikachu", "Charizard", "Bulbasaur", "Gengar" ]
     },
     {
         "nombre": "Misty",

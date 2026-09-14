@@ -93,6 +93,10 @@ class Pokemon:
         return (f"Nombre: {self.nombre}, Nivel: {self.nivel}, Tipo: {self.tipo}, Subtipo: {self.subtipo}")
 
 
+#criterios
+
+def by_name(item):
+    return item.nombre
 
 def by_poke_name(item):
     return item.nombre
@@ -101,8 +105,12 @@ def by_poke_name(item):
 lista_p = List()
 lista = List()
 
-lista_p.add_criterion('nombre', by_poke_name)
+#criterios agregados a las listas
 
+lista_p.add_criterion('nombre', by_poke_name)
+lista.add_criterion('nombre', by_name)
+
+#cargar los Pokémons y entrenadores desde las listas de datos
 
 def cargar_pokemones(lista_p: List):
     for p in Pokemons:
@@ -131,24 +139,18 @@ def cargar_entrenadores(lista: List, lista_p: List):
 cargar_pokemones(lista_p)
 cargar_entrenadores(lista, lista_p)
 
-print()
-lista.show()
+# print()
+# lista.show()
 
 
 # a. obtener la cantidad de Pokémons de un determinado entrenador;
 print()
 print()
-
-def by_name(item):
-    return item.nombre
-
-lista.add_criterion('nombre', by_name)
+print(" A) cantidad de Pokémons de un determinado entrenador")
+nom = input("Ingrese el nombre del entrenador para obtener la cantidad de Pokémons: ")
+index=lista.search(nom,'nombre')
 
 
-index=lista.search("Ash",'nombre')
-
-
-print()
 if index is not None:
     print(f"Cantidad de Pokémons de {lista[index].nombre}: {len(lista[index].pokemons)}")
 else:
@@ -157,7 +159,8 @@ else:
 
 
 # b. listar los entrenadores que hayan ganado más de tres torneos;
-
+print()
+print(" B) entrenadores que hayan ganado más de tres torneos")
 def entrenadores_mas_de_tres_torneos(lista: List) -> List:
     resultado = List()
     for i in range(lista.size()):
@@ -196,10 +199,11 @@ def pokemon_mayor_nivel_entrenador(lista: List):
     return None
 
 
-
+print(" C) el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados es:")
+print()
 pokemon_mayor , entrenador_max = pokemon_mayor_nivel_entrenador(lista)
 if pokemon_mayor is not None:   
-    print(f"el entrenador con más torneos ganados es :{entrenador_max.nombre} y el pokemon de mayor nivel que tiene es: {pokemon_mayor}")
+    print(f"{entrenador_max.nombre} y el pokemon de mayor nivel que tiene es: {pokemon_mayor}")
 else:
     print("No se encontró un entrenador con torneos ganados.")
 
@@ -208,6 +212,7 @@ print()
 
 # d. mostrar todos los datos de un entrenador y sus Pokémos;
 
+print(" D) mostrar todos los datos de un entrenador y sus Pokémos")
 nombre = input("Ingrese el nombre del entrenador: ")
 pos = lista.search(nombre,'nombre')
 
@@ -217,11 +222,16 @@ if pos is not None:
     print("Pokémons:")
     for pokemon in entrenador.pokemons:
         print(pokemon)
+else:
+    print("Entrenador no encontrado.")
+
 
 print()
 
 
 # e. mostrar los entrenadores cuyo porcentaje de batallas ganados sea mayor al 79 %;
+
+print(" E) mostrar los entrenadores cuyo porcentaje de batallas ganados sea mayor al 79 %:")
 
 def entrenadores_porcentaje_batallas(lista: List) -> List:
     resultado = List()
@@ -235,12 +245,17 @@ def entrenadores_porcentaje_batallas(lista: List) -> List:
 
 
 print()
+print("estos son los entrenadores:")
 batallas_ganadas = entrenadores_porcentaje_batallas(lista)
 batallas_ganadas.show()
+print()
 
 
 
 # f. los entrenadores que tengan Pokémons de tipo fuego y planta o agua/volador(tipo y subtipo);
+
+print(" F) los entrenadores que tengan Pokémons de tipo fuego y planta o agua/volador(tipo y subtipo):")
+
 def tipo_pokemon(lista : List) -> List:
     resultado = List()
     for i in range(lista.size()):
@@ -265,12 +280,19 @@ def tipo_pokemon(lista : List) -> List:
     return resultado
 
 print()
+
 t_pokemon = tipo_pokemon(lista)
-t_pokemon.show()
+if t_pokemon.size() > 0:
+    print("Entrenadores que cumplen con la condición:")
+    t_pokemon.show()
+else:
+    print("No hay entrenadores que cumplan con la condición.")
 
-
+print()
 
 # g. el promedio de nivel de los Pokémons de un determinado entrenador;
+
+print(" G) el promedio de nivel de los Pokémons de un determinado entrenador:")
 
 def promedio_nivel_entrenador(lista: List, nombre: str) -> float:
     pos = lista.search(nombre, 'nombre')
@@ -291,11 +313,17 @@ def promedio_nivel_entrenador(lista: List, nombre: str) -> float:
 print()
 nombre_entrenador = input("Ingrese el nombre del entrenador: ")
 promedio = promedio_nivel_entrenador(lista, nombre_entrenador)
-print(f"El promedio de nivel de los Pokémons de {nombre_entrenador} es: {promedio}")
+if promedio > 0:
+    print(f"El promedio de nivel de los Pokémons de {nombre_entrenador} es: {promedio}")
+else:
+    print(f"No se encontró al entrenador {nombre_entrenador} o no tiene Pokémons.")
+
 print()
+
 
 # h. determinar cuántos entrenadores tienen a un determinado Pokémon;
 
+print(" H) determinar cuántos entrenadores tienen a un determinado Pokémon:")
 
 def entrenadores_con_pokemon(lista: List, value: str) -> int:
     cont = 0
@@ -304,7 +332,7 @@ def entrenadores_con_pokemon(lista: List, value: str) -> int:
         for j in range(entrenador.pokemons.size()):
             if entrenador.pokemons[j].nombre == value:
                 cont += 1
-            
+            break
     return cont
 
 entrenador_pokemon = input("Ingrese el nombre del Pokémon: ")
@@ -317,7 +345,11 @@ else:
         
 print()     
 
+
+
 # i. mostrar los entrenadores que tienen Pokémons repetidos;
+
+print(" I) mostrar los entrenadores que tienen Pokémons repetidos:")
 
 def entrenadores_con_pokemons_repetidos(lista: List) -> List:
     resultado = List()
@@ -348,9 +380,12 @@ if p_repetidos.size() > 0:
 else:
     print("No hay entrenadores con Pokémons repetidos.")
 
+print()
 
 
 # j. determinar los entrenadores que tengan uno de los siguientes Pokémons: Tyrantrum, Terrakion o Wingull;
+
+print(" J) determinar los entrenadores que tengan uno de los siguientes Pokémons: Tyrantrum, Terrakion o Wingull:")
 
 def entrenadores_con_pokemons_especificos(lista: List) -> List:
     resultado = List()
@@ -382,13 +417,12 @@ if entrenadores_especificos.size() > 0:
 else:
     print("Ningún entrenador posee a Tyrantrum, Terrakion o Wingull.")
 
+print()
+
 
 # k. Determinar si un entrenador "X" tiene al Pokémon "Y" y mostrar los datos de ambos
 
-def by_name(item):
-    return item.nombre
-
-lista.add_criterion('nombre', by_name)
+print(" K) Determinar si un entrenador 'X' tiene al Pokémon 'Y' y mostrar los datos de ambos:")
 
 def buscar_entrenador_y_pokemon(lista: List, nombre_entrenador: str, nombre_pokemon: str):
     pos_entrenador = lista.search(nombre_entrenador, 'nombre')
