@@ -190,7 +190,8 @@ def pokemon_mayor_nivel_entrenador(lista: List):
         max_nivel = -1
         pokemon_max = None
         
-        for pokemon in entrenador_max.pokemons:
+        for j in range(entrenador_max.pokemons.size()):
+            pokemon = entrenador_max.pokemons[j]
             if pokemon.nivel > max_nivel:
                 max_nivel = pokemon.nivel
                 pokemon_max = pokemon
@@ -220,11 +221,8 @@ if pos is not None:
     entrenador = lista[pos]
     print(f"Datos del entrenador: {entrenador}")
     print("Pokémons:")
-    for pokemon in entrenador.pokemons:
-        print(pokemon)
-else:
-    print("Entrenador no encontrado.")
-
+    for j in range(entrenador.pokemons.size()):
+        print(entrenador.pokemons[j])
 
 print()
 
@@ -327,16 +325,25 @@ print(" H) determinar cuántos entrenadores tienen a un determinado Pokémon:")
 
 def entrenadores_con_pokemon(lista: List, value: str) -> int:
     cont = 0
+    nombre_buscado = value
+    
     for i in range(lista.size()):
         entrenador = lista[i]
+        tiene_pokemon = False
+        
         for j in range(entrenador.pokemons.size()):
-            if entrenador.pokemons[j].nombre == value:
-                cont += 1
-            break
+            if entrenador.pokemons[j].nombre == nombre_buscado:
+                tiene_pokemon = True
+                break  # Corta el bucle j al encontrar el primero
+                
+        if tiene_pokemon:
+            cont += 1
+            
     return cont
 
 entrenador_pokemon = input("Ingrese el nombre del Pokémon: ")
 cantidad_entrenadores = entrenadores_con_pokemon(lista, entrenador_pokemon)
+
 
 if cantidad_entrenadores > 0:
     print(f"Cantidad de entrenadores que tienen al Pokémon {entrenador_pokemon}: {cantidad_entrenadores}")
