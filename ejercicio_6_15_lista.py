@@ -385,16 +385,21 @@ else:
 
 # k. Determinar si un entrenador "X" tiene al Pokémon "Y" y mostrar los datos de ambos
 
+def by_name(item):
+    return item.nombre
+
+lista.add_criterion('nombre', by_name)
+
 def buscar_entrenador_y_pokemon(lista: List, nombre_entrenador: str, nombre_pokemon: str):
-    pos_entrenador = lista.search(nombre_entrenador, 'nombre_insensitive')
+    pos_entrenador = lista.search(nombre_entrenador, 'nombre')
     
     if pos_entrenador is not None:
         entrenador = lista[pos_entrenador]
-        nombre_poke_clean = nombre_pokemon.strip().lower()
+        nombre_poke_clean = nombre_pokemon
         
         for j in range(entrenador.pokemons.size()):
             poke = entrenador.pokemons[j]
-            if poke.nombre.strip().lower() == nombre_poke_clean:
+            if poke.nombre == nombre_poke_clean:
                 return entrenador, poke  
                 
     return None, None
