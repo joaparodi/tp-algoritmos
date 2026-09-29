@@ -154,125 +154,190 @@ datos = [
 
 cola = Queue()
 
-def cargar(cola: Queue ,lista_datos):
+# def cargar(cola: Queue ,lista_datos):
     
-    for d in lista_datos:
-        nuevo_p = personajes(d["personaje"], d["superheroe"], d["genero"])
-        cola.arrive(nuevo_p)
+#     for d in lista_datos:
+#         nuevo_p = personajes(d["personaje"], d["superheroe"], d["genero"])
+#         cola.arrive(nuevo_p)
 
 
 
-cargar(cola,datos)
-cola.show()
+# cargar(cola,datos)
+# cola.show()
 
 # a. determinar el nombre del personaje de la superhéroe Capitana Marvel;
 
-def n_capitanamarvel(cola: Queue):
-    print("el nombre de la capitana marvel es:")
+# def n_capitanamarvel(cola: Queue):
+#     print("el nombre de la capitana marvel es:")
     
-    for i in range(cola.size()):
-        buscado = cola.on_front()
+#     for i in range(cola.size()):
+#         buscado = cola.on_front()
         
-        if buscado.alias == "Capitana Marvel":
-         print(buscado.nombre)
-        cola.move_to_end()
+#         if buscado.alias == "Capitana Marvel":
+#          print(buscado.nombre)
+#         cola.move_to_end()
 
-n_capitanamarvel(cola)
-#cola.show()
+# n_capitanamarvel(cola)
+# #cola.show()
 
-# b. mostrar los nombre de los superhéroes femeninos;
+# # b. mostrar los nombre de los superhéroes femeninos;
 
-def sup_f(cola: Queue):
-    print("nombres de los personajes femeninos:")
-    for i in range(cola.size()):
-        femen = cola.on_front()
-        if femen.genero == "F":
-            print(femen.nombre)
-        cola.move_to_end()
+# def sup_f(cola: Queue):
+#     print("nombres de los personajes femeninos:")
+#     for i in range(cola.size()):
+#         femen = cola.on_front()
+#         if femen.genero == "F":
+#             print(femen.nombre)
+#         cola.move_to_end()
 
-sup_f(cola)
-#cola.show()
+# sup_f(cola)
+# #cola.show()
 
-# c. mostrar los nombres de los personajes masculinos;
+# # c. mostrar los nombres de los personajes masculinos;
 
-def nom_m(cola: Queue):
-    print("nombre de personajes masculinos:")
-    for i in range(cola.size()):
-        mascu = cola.on_front()
-        if mascu.genero == "M":
-            print(mascu.nombre)
-        cola.move_to_end()
+# def nom_m(cola: Queue):
+#     print("nombre de personajes masculinos:")
+#     for i in range(cola.size()):
+#         mascu = cola.on_front()
+#         if mascu.genero == "M":
+#             print(mascu.nombre)
+#         cola.move_to_end()
 
-nom_m(cola)
-#cola.show()
+# nom_m(cola)
+# #cola.show()
 
 
-# d. determinar el nombre del superhéroe del personaje Scott Lang;
+# # d. determinar el nombre del superhéroe del personaje Scott Lang;
 
-def n_scott(cola: Queue):
-    n_encon = None
-    print("el nombre de superheroe de scott lang es:")
-    for i in range(cola.size()):
-        supscott = cola.on_front()
-        if supscott.nombre == "Scott Lang":
-            n_encon = supscott.alias
-        cola.move_to_end()
-    return n_encon
+# def n_scott(cola: Queue):
+#     n_encon = None
+#     print("el nombre de superheroe de scott lang es:")
+#     for i in range(cola.size()):
+#         supscott = cola.on_front()
+#         if supscott.nombre == "Scott Lang":
+#             n_encon = supscott.alias
+#         cola.move_to_end()
+#     return n_encon
 
-esta_scott = n_scott(cola)
+# esta_scott = n_scott(cola)
 
-if esta_scott:
-    print(esta_scott)
-else:
-    print("no se encontro scott lang")
+# if esta_scott:
+#     print(esta_scott)
+# else:
+#     print("no se encontro scott lang")
 
-# e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan con la letra S;
+# # e. mostrar todos datos de los superhéroes o personaje cuyos nombres comienzan con la letra S;
 
-def nom_con_s(cola: Queue):
-    lista_encontrados = [] # Iniciamos una lista vacía
-    print("datos de los superheroes cuyo nombre empieza con s:")
-    for i in range(cola.size()):
-        nom_s = cola.on_front()
-        if nom_s.nombre[0] == ("S"):
-            lista_encontrados.append(nom_s) # Guardamos cada coincidencia
-        cola.move_to_end()
+# def nom_con_s(cola: Queue):
+#     lista_encontrados = [] # Iniciamos una lista vacía
+#     print("datos de los superheroes cuyo nombre empieza con s:")
+#     for i in range(cola.size()):
+#         nom_s = cola.on_front()
+#         if nom_s.nombre[0] == ("S"):
+#             lista_encontrados.append(nom_s) # Guardamos cada coincidencia
+#         cola.move_to_end()
         
-    return lista_encontrados
+#     return lista_encontrados
 
-resultados = nom_con_s(cola)
+# resultados = nom_con_s(cola)
 
-if len(resultados) > 0:
-    for p in resultados:
-        print(p) # Esto llamará automáticamente al __str__ de tu clase
-else:
-    print("No se encontraron personajes cuyos nombres empiecen con S.")
-
-
-
-# f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre de superhéroes.
-
-def indi_carol(cola: Queue):
-    encontrado = None
-    print("verificacion de personaje carol danvers:")
-    for i in range(cola.size()):
-        nom_bus = cola.on_front()
-        if nom_bus.nombre == "Carol Danvers":
-            encontrado = nom_bus.alias
-        cola.move_to_end()
-    return encontrado
-
-
-resultado = indi_carol(cola)
-
-if resultado:
-    print(f"Se encontró a Carol Danvers. Su nombre de superhéroe es: {resultado}")
-else:
-    print("No se encontró a Carol Danvers en la cola.")
+# if len(resultados) > 0:
+#     for p in resultados:
+#         print(p) # Esto llamará automáticamente al __str__ de tu clase
+# else:
+#     print("No se encontraron personajes cuyos nombres empiecen con S.")
 
 
 
+# # f. determinar si el personaje Carol Danvers se encuentra en la cola e indicar su nombre de superhéroes.
+
+# def indi_carol(cola: Queue):
+#     encontrado = None
+#     print("verificacion de personaje carol danvers:")
+#     for i in range(cola.size()):
+#         nom_bus = cola.on_front()
+#         if nom_bus.nombre == "Carol Danvers":
+#             encontrado = nom_bus.alias
+#         cola.move_to_end()
+#     return encontrado
 
 
+# resultado = indi_carol(cola)
+
+# if resultado:
+#     print(f"Se encontró a Carol Danvers. Su nombre de superhéroe es: {resultado}")
+# else:
+#     print("No se encontró a Carol Danvers en la cola.")
+
+
+
+
+# 16. Utilice cola de prioridad, para atender la cola de impresión tomando en cuenta el siguiente
+# criterio (1- empleados, 2- staff de tecnologías de la información “TI”, 3- gerente), y resuelva la
+# siguiente situación:
+# a. cargue tres documentos de empleados (cada documento se representa solamente con
+# un nombre).
+# b. imprima el primer documento de la cola (solamente mostrar el nombre de este por pantalla).
+# c. cargue dos documentos del staff de TI.
+# d. cargue un documento del gerente.
+# e. imprima los dos primeros documentos de la cola.
+# f. cargue dos documentos de empleados y uno de gerente.
+# g. imprima todos los documentos de la cola de impresión
+
+
+cola = Queue()
+
+print()
+# a. Cargue tres documentos de empleados
+cola.arrive("Documento_Emp_1", 1)
+cola.arrive("Documento_Emp_2", 1)
+cola.arrive("Documento_Emp_3", 1)
+
+cola.show()
+
+print()
+# b. Imprima el primer documento de la cola (mostrar el nombre)
+print("Imprimiendo:", cola.attention()[1]) # O el método que use tu TDA para obtener el dato
+
+print()
+# c. Cargue dos documentos del staff de TI
+cola.arrive("Documento_TI_1", 2)
+cola.arrive("Documento_TI_2", 2)
+
+cola.show()
+
+print()
+# d. Cargue un documento del gerente
+cola.arrive("Documento_Gerente_1", 3)
+
+cola.show()
+
+print()
+# e. Imprima los dos primeros documentos de la cola
+print(f"Imprimiendo:, {cola.attention()[1]}")
+print(f"Imprimiendo:, {cola.attention()[1]}")
+
+cola.show()
+
+print()
+# f. Cargue dos documentos de empleados y uno de gerente
+cola.arrive("Documento_Emp_4", 1)
+cola.arrive("Documento_Emp_5", 1)
+cola.arrive("Documento_Gerente_2", 3)
+
+cola.show()
+
+print()
+# g. imprima todos los documentos de la cola de impresión
+
+# while cola.size() > 0:
+#     priority, value = cola.attention()
+#     print(priority , value)
+
+# if cola.size() > 0 :
+#     print("quedan elementos en la cola")
+# else:
+#     print("esta vacia")
 
 
 
