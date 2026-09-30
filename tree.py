@@ -1,7 +1,8 @@
 
 from typing import Any, Optional
 
-from queue_ import Queue
+from queue import Queue
+
 class Node():
 
     def __init__(self, value=None, other_values=None):
@@ -161,14 +162,17 @@ class BinaryTree():
     def inorden(self) -> None:
         
         def __inorden(root):
-            if root.left is not None:
+            if root is not None:
+                if root.left is not None:
                 # print(f'anda a la izquierda de {root.value}')
-                __inorden(root.left)
+                    __inorden(root.left)
             # print(f'procesa nodo actual')
-            print(root.value, root.height)
-            if root.right is not None:
+                print(root.value, root.height)
+                if root.right is not None:
                 # print(f'anda a a derecha de {root.value}')
-                __inorden(root.right)
+                    __inorden(root.right)
+            else :
+                return None
 
         __inorden(self.root)
     
@@ -254,6 +258,7 @@ class BinaryTree():
             if root.left is not None:
                 __proxy_search(root.left, prefix)
             if prefix in root.value.lower():
+                # print(f"Encontrado: {root.value} | Datos: {root.other_values}")
                 print(root.value)
             if root.right is not None:
                 __proxy_search(root.right, prefix)
@@ -275,72 +280,33 @@ class BinaryTree():
         count = __count_heroes(self.root)
         return count
 
-# class Persona:
+    
+    def separar_en_bosque(self, heroes_tree, villains_tree,condition):
+        def __separar(root):
+            if root is not None:
+                __separar(root.left)
+                
+                # Evaluamos el campo booleano en other_values
+                if root.other_values.get(condition):
+                    villains_tree.insert_node(root.value, root.other_values)
+                else:
+                    heroes_tree.insert_node(root.value, root.other_values)
+                    
+                __separar(root.right)
 
-#     def __init__(self, nom, ape, dni):
-#         self.nom = nom
-#         self.ape = ape
-#         self.dni = dni
-
-#     def __str__(self):
-#         return f"{self.ape} {self.nom} {self.dni}"
-
-arbol = BinaryTree()
-# arbol_ape = BinaryTree()
-
-# p1 = Persona('Pepito', 'Gonzalez', 23)
-# p2 = Persona('Pepito', 'Perez', 24)
-# p3 = Persona('Pepito', 'Garcia', 25)
-# p4 = Persona('Pepito', 'Casanova', 26)
-
-# arbol.insert_node(p1.dni, p1)
-# arbol.insert_node(p2.dni, p2)
-# arbol.insert_node(p3.dni, p3)
-# arbol.insert_node(p4.dni, p4)
-
-# arbol_ape.insert_node(p1.ape, p1)
-# arbol_ape.insert_node(p2.ape, p2)
-# arbol_ape.insert_node(p3.ape, p3)
-# arbol_ape.insert_node(p4.ape, p4)
-# arbol.insert_node('B')
-# arbol.insert_node('W')
-# arbol.insert_node('V')
-# arbol.insert_node('F')
-# arbol.insert_node('P')
-# arbol.insert_node('R')
-for i in range (1, 13):
-    arbol.insert_node(i)
-
-# arbol.inorden()
-# print()
-# arbol.root = arbol.auto_balance(arbol.root)
-
-
-# arbol.by_level()
-
-# print(arbol.root.right.left.value)
-
-arbol.preorden()
-
-
-
-            #                                     8
-            #                 4                                               10
-            #     2                       6                       9                      11
-            # 1       3               5       7                                               12
-# print()
-# print('eliminar', arbol.delete_node('F'))
-# print()
-# arbol.inorden()
-
-# aux = arbol.search(26)
-# if aux is not None:
-#     print(f'valor encontrado {aux.other_values}')
-# else:
-#     print('no encontrado')
-
-# aux = arbol_ape.search('Gonzalez')
-# if aux is not None:
-#     print(f'valor encontrado {aux.other_values}')
-# else:
-#     print('no encontrado')
+        __separar(self.root)
+    
+    # def pasar_a_bosque(root, arbol_h, arbol_v):
+    #     if root is not None:
+    #         pasar_a_bosque(root.left, arbol_h, arbol_v)
+        
+    #     # Validamos el campo booleano (asegúrate de que la clave sea 'is_villian' o 'is_villain' según tu archivo de datos)
+    #         es_villano = root.other_values.get('is_villian', False)
+        
+    #         if es_villano:
+    #             arbol_v.insert_node(root.value, root.other_values)
+    #         else:
+    #             arbol_h.insert_node(root.value, root.other_values)
+        
+    #     pasar_a_bosque(root.right, arbol_h, arbol_v)
+    
