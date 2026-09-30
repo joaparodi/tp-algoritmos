@@ -281,6 +281,9 @@ class BinaryTree():
         return count
 
 
+#funciones usadas en el ejercicio 5
+
+
     def count_villian(self) -> None:
             def __count_villian(root):
                 count = 0
@@ -325,4 +328,39 @@ class BinaryTree():
         
         # Retorna ambos árboles ya armados (el bosque)
         return arbol_heroes, arbol_villanos
+
+
+
+#funciones usadas en el ejercicio 23
+
+    def inorden_criaturas_y_asesinos(self) -> None:
+            def __inorden(root):
+                if root is not None:
+                    __inorden(root.left)
+                    # Accedemos directamente a los atributos del objeto Criatura
+                    print(f"Criatura: {root.other_values.name} --> Derrotado por: {root.other_values.killer}")
+                    __inorden(root.right)
+            __inorden(self.root)
+
+    def cargar_des(self) -> None:
+        def __cargar(root):
+            if root is not None:
+                __cargar(root.left)
+                print(f"agrega descripcion de :{root.value}")
+                res =input("Descripcion:")
+                root.other_values.description = res
+                __cargar(root.right)  
+
+        __cargar(self.root)
+
+
+
+
+
+
+
+
+
+
+
     

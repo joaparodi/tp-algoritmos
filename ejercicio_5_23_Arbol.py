@@ -146,3 +146,23 @@ cargar(arbol_criatura)
 
 arbol_criatura.inorden()
 
+# A
+print("\n--listado de criaturas y quienes lo derrotaron")
+arbol_criatura.inorden_criaturas_y_asesinos()
+
+# B
+
+# print("\n--cargar descripcion de cada criatura---")
+
+# arbol_criatura.cargar_des()
+
+# C
+
+print("\n--informacion de la criatura de talos---")
+talos = arbol_criatura.search("Talos")
+if talos is not None:
+    print(talos.other_values)
+else:
+    print(" No se encontró la criatura Talos en el árbol.")
+
+
