@@ -258,7 +258,7 @@ class BinaryTree():
             if root.left is not None:
                 __proxy_search(root.left, prefix)
             if prefix in root.value.lower():
-                # print(f"Encontrado: {root.value} | Datos: {root.other_values}")
+                print(f"Encontrado: {root.value} | Datos: {root.other_values}")
                 print(root.value)
             if root.right is not None:
                 __proxy_search(root.right, prefix)
@@ -280,33 +280,49 @@ class BinaryTree():
         count = __count_heroes(self.root)
         return count
 
-    
-    def separar_en_bosque(self, heroes_tree, villains_tree,condition):
-        def __separar(root):
-            if root is not None:
-                __separar(root.left)
-                
-                # Evaluamos el campo booleano en other_values
-                if root.other_values.get(condition):
-                    villains_tree.insert_node(root.value, root.other_values)
-                else:
-                    heroes_tree.insert_node(root.value, root.other_values)
-                    
-                __separar(root.right)
 
-        __separar(self.root)
+    def count_villian(self) -> None:
+            def __count_villian(root):
+                count = 0
+                if root is not None:
+                    if root.left is not None:
+                        count += __count_villian(root.left)
+                    if  root.other_values['is_villain']:
+                        count += 1
+                    if root.right is not None:
+                        count += __count_villian(root.right)
+                return count
     
-    # def pasar_a_bosque(root, arbol_h, arbol_v):
-    #     if root is not None:
-    #         pasar_a_bosque(root.left, arbol_h, arbol_v)
+            count = __count_villian(self.root)
+            return count
+
+
+
+    
+    def generar_bosque(self):
+        """
+        Recorre el árbol original y genera un bosque separando 
+        a los héroes y villanos en dos árboles independientes.
+        """
+        arbol_heroes = BinaryTree()
+        arbol_villanos = BinaryTree()
+
+        def __recorrer_y_separar(root):
+            if root is not None:
+                if root.left is not None:
+                    __recorrer_y_separar(root.left)
+                
+                # Usamos tu condición del diccionario
+                if root.other_values.get('is_villain'):
+                    arbol_villanos.insert_node(root.value, root.other_values)
+                else:
+                    arbol_heroes.insert_node(root.value, root.other_values)
+                    
+                if root.right is not None:
+                    __recorrer_y_separar(root.right)
+
+        __recorrer_y_separar(self.root)
         
-    #     # Validamos el campo booleano (asegúrate de que la clave sea 'is_villian' o 'is_villain' según tu archivo de datos)
-    #         es_villano = root.other_values.get('is_villian', False)
-        
-    #         if es_villano:
-    #             arbol_v.insert_node(root.value, root.other_values)
-    #         else:
-    #             arbol_h.insert_node(root.value, root.other_values)
-        
-    #     pasar_a_bosque(root.right, arbol_h, arbol_v)
+        # Retorna ambos árboles ya armados (el bosque)
+        return arbol_heroes, arbol_villanos
     

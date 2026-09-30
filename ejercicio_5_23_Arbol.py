@@ -18,63 +18,131 @@
 
 
 from super_heroes_data import superheroes
+from criaturas import Criaturas
 from tree import BinaryTree
 
 
-class MarvelCharacter():
+# class MarvelCharacter():
 
-    def __init__(self, nombre, anio, casa, bio):
-        self.name = nombre
-        self.year = anio
-        self.house = casa
-        self.bio = bio
+#     def __init__(self, nombre, anio, casa, bio):
+#         self.name = nombre
+#         self.year = anio
+#         self.house = casa
+#         self.bio = bio
 
-    def __str__(self):
-        return f"{self.name} - {self.year} - {self.house}"
+#     def __str__(self):
+#         return f"{self.name} - {self.year} - {self.house}"
     
 
 
-arbol_marvel = BinaryTree()
+# arbol_marvel = BinaryTree()
 
-print(f'cantidad de elementos {len(superheroes)}')
-#A
-for marvel_character in superheroes:
-    arbol_marvel.insert_node(marvel_character['name'], other_value=marvel_character)
+# print(f'cantidad de elementos {len(superheroes)}')
+# #A
+# for marvel_character in superheroes:
+#     arbol_marvel.insert_node(marvel_character['name'], other_value=marvel_character)
 
-# #B
-# arbol_marvel.inorden_villain()
-
-
-# #C
-# arbol_marvel.inorden_hero_star_with('An')
-
-# #D
-# print(f'cantidad de heroes: {arbol_marvel.count_heroes()}')
-
-# E
-search_str = input('ingrese lo que quiere buscar(DC.String): ')
-arbol_marvel.proxy_search(search_str.lower())
+# # #B
+# print("\n---ejercicio 5.b---")
+# # arbol_marvel.inorden_villain()
 
 
-search_str = input('ingrese lo que quiere modificar: ')
+# # #C
+# print("\n---ejercicio 5.c---")
+# # arbol_marvel.inorden_hero_star_with('C')
 
-node = arbol_marvel.search(search_str)
-if node is not None:
-    new_name = input('ingrese el nuevo nombre: ')
-    delete_value, delete_other_value = arbol_marvel.delete_node(node.value)
-    delete_other_value['name'] = new_name
-    arbol_marvel.insert_node(new_name, delete_other_value)
+# # #D
+# print("\n---ejercicio 5.d---")
+# # print(f'cantidad de heroes: {arbol_marvel.count_heroes()}')
 
-print()
-arbol_marvel.inorden_hero_star_with('D')
+# # E
+# print("\n---ejercicio 5.e---")
+# search_str = input('ingrese lo que quiere buscar(DC.String): ')
+# arbol_marvel.proxy_search(search_str.lower())
+
+
+# search_str = input('ingrese lo que quiere modificar: ')
+
+# node = arbol_marvel.search(search_str)
+# if node is not None:
+#     new_name = input('ingrese el nuevo nombre: ')
+#     delete_value, delete_other_value = arbol_marvel.delete_node(node.value)
+#     delete_other_value['name'] = new_name
+#     arbol_marvel.insert_node(new_name, delete_other_value)
+
+
+# arbol_marvel.inorden_hero_star_with('D')
+
 
 # # F
+# print("\n---ejercicio 5.f---")
 # arbol_marvel.postorden_hero()
 
-#G
-# g. generar un bosque a partir de este árbol, un árbol debe contener a los superhéroes y otro a los villanos, luego resolver las siguiente tareas:
+# #G
+
+
+# arbol_heroes, arbol_villanos = arbol_marvel.generar_bosque()
+# print("\n---ejercio 5.g----")
+# print("--- I. Cantidad de nodos ---")
+# print(f"Nodos en Héroes: {arbol_heroes.count_heroes()}")
+# print(f"Nodos en Villanos: {arbol_villanos.count_villian()}")
+
+# # g.II. Realizar un barrido ordenado alfabéticamente de cada árbol
+# print("\n---Barrido alfabético de Héroes ---")
+# arbol_heroes.inorden()
+
+# print("\n---Barrido alfabético de Villanos ---")
+# arbol_villanos.inorden()
 
 
 
 
+# 23.Implementar un algoritmo que permita generar un árbol con los datos de la siguiente tabla y resuelva las siguientes consultas:
+# a. listado inorden de las criaturas y quienes la derrotaron;
+# b. se debe permitir cargar una breve descripción sobre cada criatura;
+# c. mostrar toda la información de la criatura Talos;
+# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+# e. listar las criaturas derrotadas por Heracles;
+# f. listar las criaturas que no han sido derrotadas;
+# g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe o dios que la capturo;
+# h. modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de Erimanto indicando que Heracles las atrapó;
+# i. se debe permitir búsquedas por coincidencia;
+# j. eliminar al Basilisco y a las Sirenas;
+# k. modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles derroto a varias;
+# l. modifique el nombre de la criatura Ladón por Dragón Ladón;
+# m. realizar un listado por nivel del árbol;
+# n. muestre las criaturas capturadas por Heracles.
+
+
+class criatura:
+    def __init__(self, nombre, asesino, descripcion="", capturada=None):
+            self.name = nombre
+            self.killer = asesino
+            self.description = descripcion
+            self.captured = capturada  # Campo solicitado en el punto g
+    
+    def __str__(self):
+        return f"Nombre: {self.name} | Derrotado por: {self.killer} | Capturada por: {self.captured} | Desc: {self.description}"
+    
+    
+arbol_criatura = BinaryTree()
+
+print(len(Criaturas))
+
+def cargar(arbol_criatura : BinaryTree):
+    
+    for c in Criaturas:
+        
+        objeto_criatura = criatura(
+            nombre=c['name'], 
+            asesino=c['killer'], 
+            descripcion=c.get('description', ''), 
+            capturada=c.get('captured', None)
+        )
+        
+        arbol_criatura.insert_node(c['name'], other_value=objeto_criatura)
+        
+cargar(arbol_criatura)
+
+arbol_criatura.inorden()
 
