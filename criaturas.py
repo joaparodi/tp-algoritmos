@@ -21,7 +21,7 @@ Criaturas= [
     {"name": "Cerbero", "killer": "-", "description": "", "captured": None},
     
     # Columna Derecha
-    {"name": "Cerda de Cromión", "killer": "Teseo", "description": "", "captured": None},
+# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
     {"name": "Ortro", "killer": "Heracles", "description": "", "captured": None},
     {"name": "Toro de Creta", "killer": "Teseo", "description": "", "captured": None},
     {"name": "Jabalí de Calidón", "killer": "Atalanta", "description": "", "captured": None},

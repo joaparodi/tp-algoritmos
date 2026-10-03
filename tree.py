@@ -1,4 +1,6 @@
 
+from logging import root
+from platform import node
 from typing import Any, Optional
 
 from queue import Queue
@@ -216,7 +218,11 @@ class BinaryTree():
                     pendings.arrive(node.right)
                 # print(f'queue ')
                 # pendings.show()
+
                 # input()
+
+
+#funciones usadas en el ejercicio 5
 
     def inorden_villain(self) -> None:
         
@@ -281,7 +287,7 @@ class BinaryTree():
         return count
 
 
-#funciones usadas en el ejercicio 5
+
 
 
     def count_villian(self) -> None:
@@ -331,7 +337,7 @@ class BinaryTree():
 
 
 
-#funciones usadas en el ejercicio 23
+    #funciones usadas en el ejercicio 23
 
     def inorden_criaturas_y_asesinos(self) -> None:
             def __inorden(root):
@@ -354,9 +360,55 @@ class BinaryTree():
         __cargar(self.root)
 
 
+    def derrotadores_criaturas(self) -> list:
+        derrotadores = {}
 
+        def contar_derrotadores(root):
+            if root is not None:
+            # .strip() elimina espacios sobrantes alrededor del texto
+                derrotador = root.other_values.killer.strip() if root.other_values.killer else None
 
+                # Filtra que exista, que no sea vacio, ni guion, ni None
+                if derrotador and derrotador not in ["-", "", "None", "none"]:
+                    if derrotador in derrotadores:
+                        derrotadores[derrotador] += 1
+                    else:
+                        derrotadores[derrotador] = 1
 
+                contar_derrotadores(root.left)
+                contar_derrotadores(root.right)
+
+        contar_derrotadores(self.root)
+
+        # Ordena de mayor a menor y toma los primeros 3 del ranking
+        top_3_derrotadores = sorted(derrotadores.items(), key=lambda x: x[1], reverse=True)[:3]
+        return top_3_derrotadores
+
+    def criaturas_derrotadas_por(self, nombre_heroe) -> list:
+        derrotadas = []
+
+        def buscar_derrotadas(root):
+            if root is not None:
+                if root.other_values.killer == nombre_heroe:
+                    derrotadas.append(root.other_values.name)
+                buscar_derrotadas(root.left)
+                buscar_derrotadas(root.right)
+
+        buscar_derrotadas(self.root)
+        return derrotadas
+    
+    def criaturas_no_derrotadas(self) -> list:
+        no_derrotadas = []
+
+        def buscar_no_derrotadas(root):
+            if root is not None:
+                if root.other_values.killer in ["-", "", "None", "none"]:
+                    no_derrotadas.append(root.other_values.name)
+                buscar_no_derrotadas(root.left)
+                buscar_no_derrotadas(root.right)
+
+        buscar_no_derrotadas(self.root)
+        return no_derrotadas
 
 
 

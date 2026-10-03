@@ -12,44 +12,213 @@ from entrenadores import Entrenadores
 
 
 
-# -------5. Dada una lista de números enteros eliminar de estas los números primos---------
+# 6. Dada una lista de superhéroes de comics, de los cuales se conoce su nombre, año aparición,casa de comic a la que pertenece (Marvel o DC) y biografía, implementar la funciones necesa-
+# rias para poder realizar las siguientes actividades:
 
-# lista = List()
+# a. eliminar el nodo que contiene la información de Linterna Verde;
+# b. mostrar el año de aparición de Wolverine;
+# c. cambiar la casa de Dr. Strange a Marvel;
+# d. mostrar el nombre de aquellos superhéroes que en su biografía menciona la palabra “traje” o “armadura”;
+# e. mostrar el nombre y la casa de los superhéroes cuya fecha de aparición sea anterior a 1963;
+# f. mostrar la casa a la que pertenece Capitana Marvel y Mujer Maravilla;
+# g. mostrar toda la información de Flash y Star-Lord;
+# h. listar los superhéroes que comienzan con la letra B, M y S;
+# i. determinar cuántos superhéroes hay de cada casa de comic.
 
-# def cargar(lista: List):
-#     for i in range(10):
-#         lista.append(randint(0,20))
 
 
-# cargar(lista)
-# print("lista original :")
+superheroes = [
+    {
+      "nombre": "Spider-Man",
+      "anio_aparicion": 1962,
+      "casa": "Marvel",
+      "biografia": "Peter Parker fue mordido por una araña radiactiva y obtuvo poderes de superhéroe. Trabaja como fotógrafo freelance en el Daily Bugle mientras protege Nueva York."
+    },
+    {
+      "nombre": "Iron Man",
+      "anio_aparicion": 1963,
+      "casa": "Marvel",
+      "biografia": "Tony Stark, genio multimillonario e inventor, construyó una armadura tecnológica para escapar de sus captores. Fundador de los Vengadores y director de Stark Industries."
+    },
+    {
+      "nombre": "Wolverine",
+      "anio_aparicion": 1974,
+      "casa": "Marvel",
+      "biografia": "Logan posee un esqueleto recubierto de adamantium y garras retráctiles. Su factor de curación acelerada lo hace casi inmortal. Miembro icónico de los X-Men."
+    },
+    {
+      "nombre": "Thor",
+      "anio_aparicion": 1962,
+      "casa": "DC",
+      "biografia": "Dios nórdico del trueno e hijo de Odín. Empuña el martillo Mjolnir y defiende tanto Asgard como la Tierra. Miembro fundador de los Vengadores."
+    },
+    {
+      "nombre": "Black Widow",
+      "anio_aparicion": 1964,
+      "casa": "Marvel",
+      "biografia": "Natasha Romanoff fue entrenada desde niña en el programa Habitación Roja. Es una espía y agente de élite de S.H.I.E.L.D., experta en artes marciales y tecnología."
+    },
+    {
+      "nombre": "Batman",
+      "anio_aparicion": 1939,
+      "casa": "DC",
+      "biografia": "Bruce Wayne presenció el asesinato de sus padres de niño y juró proteger Gotham. Sin poderes, usa su inteligencia, fortuna y entrenamiento físico para combatir el crimen. Usando un traje con muchas herramientas"
+    },
+    {
+      "nombre": "Superman",
+      "anio_aparicion": 1938,
+      "casa": "DC",
+      "biografia": "Kal-El fue enviado desde el planeta Krypton antes de su destrucción. Adoptado como Clark Kent en Kansas, usa sus poderes solares para defender la Tierra."
+    },
+    {
+      "nombre": "Mujer Maravilla",
+      "anio_aparicion": 1941,
+      "casa": "DC",
+      "biografia": "Diana, princesa de las Amazonas de la isla Temyscira, fue criada como guerrera. Porta el lazo de la verdad y las brazaletes indestructibles. Embajadora de paz y justicia."
+    },
+    {
+      "nombre": "The Flash",
+      "anio_aparicion": 1956,
+      "casa": "DC",
+      "biografia": "Barry Allen era un científico forense que fue alcanzado por un rayo durante un experimento. Obtuvo la capacidad de moverse a velocidades superlumínicas conectado a la Fuerza de la Velocidad."
+    },
+    {
+      "nombre": "Green Lantern",
+      "anio_aparicion": 1959,
+      "casa": "DC",
+      "biografia": "Hal Jordan fue elegido por el anillo de poder de los Guardianes del Universo. El anillo le permite crear construcciones de energía verde limitadas solo por su voluntad e imaginación."
+    }
+]
+
+
+
+lista = List()
+
+
+class Superheroes:
+    def __init__(self,nombre,anio_ap,casa,bio):
+        self.name = nombre
+        self.year = anio_ap
+        self.house = casa
+        self.bio = bio
+        
+    def __str__(self):
+        return f"nombre:{self.name}------año de aparicion:{self.year}---------casa:{self.house}--------biografia:{self.bio}"
+        
+
+def cargar(lista,superheroes):
+    for hero in superheroes:
+        lista.append(Superheroes(hero["nombre"],hero["anio_aparicion"],hero["casa"],hero["biografia"]))
+
+
+
+cargar(lista,superheroes)
 # lista.show()
+
+#criterios
+# def by_name(item):
+#     return item.name
+
+# def by_year(item):
+#     return item.year
+
+
+
+# a. eliminar el nodo que contiene la información de Linterna Verde
+
+# lista.add_criterion("name",by_name)
+# delete_value = lista.delete_value("Green Lantern", 'name')
+
+# print("eliminar el nodo que contiene la información de Linterna Verde")
+# print(f"valor eliminado {delete_value}")
 # print()
 
-# def es_primo(num):
-#     if num < 2:
-#         return False
-#     for i in range(2, int(num**0.5) + 1):
-#         if num % i == 0:
-#             return False
-#     return True
 
-# def elimi_primo(lista: List):
-#     primos = List()
-    
-#     for i in range(lista.size()):
-#         numero = lista[i]
-#         if es_primo(numero):
-#             primos.append(numero)
-            
-#     for i in range(primos.size()):
-#         lista.delete_value(primos[i])
-    
-            
-# elimi_primo(lista)
+# b. mostrar el año de aparición de Wolverine;
+# print(" mostrar el año de aparición de Wolverine")
+# buscado = lista.search( "Wolverine",'name')
+# if buscado is not None:
+#     print(f'anio de aparicion de {lista[buscado].name} es {lista[buscado].year}')
+# else:
+#     print('no esta en la lista')
+
 # print()
-# print("lista sin los numeros primos :")
-# lista.show()
+
+
+# c. cambiar la casa de thor a Marvel;
+# print("cambiar la casa de thor a Marvel;")
+# thor = lista.search( "Thor",'name')
+# lista[thor].house = "Marvel"
+# if thor is not None:
+#     print(f"la nueva casa de thor es:{lista[thor].house}")
+# else:
+#     print("no se encontro thor")
+
+# print()
+# # d. mostrar el nombre de aquellos superhéroes que en su biografía menciona la palabra “traje” o “armadura”;
+# print("mostrar el nombre de aquellos superhéroes que en su biografía menciona la palabra traje o armadura")
+# lista.filter_contain_on_bio(['traje','armadura'])
+# print()
+
+# e. mostrar el nombre y la casa de los superhéroes cuya fecha de aparición sea anterior a 1963;
+
+# print("nombre y casa de los superheroes cuya fecha de aparicion es anterior a 1963")
+# for hero in lista:
+#     if hero.year < 1963:
+#         print(hero)
+
+# print()
+
+# f. mostrar la casa a la que pertenece Capitana Marvel y Mujer Maravilla;
+# print("casa a la que pertenece la mujer maravilla y capitana marvel:")
+# capMarvel = lista.search("Capitana Marvel",'name')
+# if capMarvel is not None:
+#     print(f"la casa de capitana Marvel es:{lista[capMarvel].house}")
+# else:
+#     print("no esta la capitana marvel")
+
+# mujerMaravilla = lista.search("Mujer Maravilla",'name')
+# if mujerMaravilla is not None:
+#     print(f"la casa de la mujer maravilla es:{lista[mujerMaravilla].house}")
+# else:
+#     print("no esta la mujer maravilla")
+
+# print()
+
+
+
+# g. mostrar toda la información de Flash y Star-Lord;
+# print("mostrar la informacion de flash y de star-lord:")
+# flash = lista.search("The Flash","name")
+# if flash is not None:
+#     print(f"informacion de flash: {lista[flash].bio}")
+# else:
+#     print("flash no se encontro")
+
+# star_lord = lista.search("Star-Lord",'name')
+# if star_lord is not None:
+#     print(f"la informacion de Star-lord :{lista[star_lord].bio}")
+# else:
+#     print("no se encuentra en la lista Star-lord ")
+
+# print()
+
+# h. listar los superhéroes que comienzan con la letra B, M y S;
+# print("lista de superheroes que empiezan con B , M , S:")
+# lista.filter_start_with(("B","M","S"))
+# print()
+
+# i. determinar cuántos superhéroes hay de cada casa de comic.
+# print("cantidad de superheroes que ahi por casa de comic:")
+
+# dc = lista.count_by_field('house','DC')
+# print(f"cantidad de superheroes de la casa de comic de DC es de:{dc} ")
+
+# Marvel = lista.count_by_field('house','Marvel')
+
+# print(f"cantidad de superheroes de la casa de comic de Marvel es de :{Marvel}")
+
+# print()
 
 
 

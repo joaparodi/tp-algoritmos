@@ -159,10 +159,53 @@ arbol_criatura.inorden_criaturas_y_asesinos()
 # C
 
 print("\n--informacion de la criatura de talos---")
+
 talos = arbol_criatura.search("Talos")
 if talos is not None:
     print(talos.other_values)
 else:
     print(" No se encontró la criatura Talos en el árbol.")
+    
+# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+
+# Lo llamás directamente desde el objeto arbol_criatura sin pasarle parámetros:
+# derrotadores_top_3 = arbol_criatura.derrotadores_criaturas()
+
+# print("\n--Los 3 héroes o dioses que derrotaron mayor cantidad de criaturas---")
+# if derrotadores_top_3:
+#     for derrotador, cantidad in derrotadores_top_3:
+#         print(f"{derrotador}: {cantidad} criaturas derrotadas")
+# else:
+#     print("No se encontraron derrotadores en el árbol.")
 
 
+# e. listar las criaturas derrotadas por Heracles;
+print("\n--Criaturas derrotadas por Heracles---")
+heracles_criaturas = arbol_criatura.criaturas_derrotadas_por("Heracles")
+
+if heracles_criaturas:
+    for criatura in heracles_criaturas:
+        print(criatura)
+else:
+    print("No se encontraron criaturas derrotadas por Heracles.")
+
+
+
+# f. listar las criaturas que no han sido derrotadas;
+
+print("\n--Criaturas que no han sido derrotadas---")
+no_derrotadas = arbol_criatura.criaturas_no_derrotadas()
+
+if no_derrotadas:
+    for criatura in no_derrotadas:
+        print(criatura)
+else:
+    print("No se encontraron criaturas que no hayan sido derrotadas.")
+    
+
+# g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe o dios que la capturo;
+
+    
+    
+    
+    
