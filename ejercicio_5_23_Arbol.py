@@ -273,17 +273,27 @@ modificar_y_agregar_capturador(arbol_criatura, "Aves del Estínfalo", "Heracles"
 # l. modifique el nombre de la criatura Ladón por Dragón Ladón;
 
 
-def modificar_y_agregar_capturador(arbol_criatura , nombre_criatura):
-    aux = arbol_criatura.search(nombre_criatura)
+# l. Modifique el nombre de la criatura Ladón por Dragón Ladón
+
+def renombrar_criatura_en_arbol(arbol,criatura, nombre_nuevo):
+    
+    aux = arbol.search(criatura)
+    
     if aux is not None:
-        aux.other_values.name = "Dragón Ladón"
-        aux.value = "Dragón Ladón"  # Actualizamos también el valor del nodo
-        print(f"Se ha modificado con exito el nombre de la criatura '{nombre_criatura}'a 'Dragón Ladón'.")
+        datos_criatura = aux.other_values
+        
+        datos_criatura.name = nombre_nuevo
+        
+        arbol.delete_node(criatura)
+        
+        arbol.insert_node(nombre_nuevo, other_value=datos_criatura)
+        
+        print(f"Se ha renombrado con éxito '{criatura}' a '{nombre_nuevo}' reestructurando el árbol.")
     else:
-        print(f"No se encontró la criatura '{nombre_criatura}' en el árbol.")
+        print(f"No se encontró la criatura '{criatura}' en el árbol.")
 
 print("\n--Modificando Ladón a Dragón Ladón---")
-modificar_y_agregar_capturador(arbol_criatura, "Ladón")
+renombrar_criatura_en_arbol(arbol_criatura, "Ladón", "Dragón Ladón")
 
 
 
