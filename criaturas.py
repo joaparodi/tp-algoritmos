@@ -1,6 +1,7 @@
 Criaturas= [
     # Columna Izquierda
     {"name": "Ceto", "killer": "-", "description": "", "captured": None},
+    {"name": "Euríale", "killer": "-", "description": "", "captured": None},
     {"name": "Tifón", "killer": "Zeus", "description": "", "captured": None},
     {"name": "Equidna", "killer": "Argos Panoptes", "description":"", "captured": None},
     {"name": "Dino", "killer": "-", "description": "", "captured": None},
@@ -14,7 +15,7 @@ Criaturas= [
     {"name": "Ladón", "killer": "Heracles", "description": "", "captured": None},
     {"name": "Águila del Cáucaso", "killer": "-", "description": "", "captured": None},
     {"name": "Quimera", "killer": "Belerofonte", "description": "", "captured": None},
-    {"name": "Hidra de Lerna", "killer": "Heracles", "description": "", "captured": None},
+    {"name": "Hidra de Lerna", "killer": "-"},
     {"name": "León de Nemea", "killer": "Heracles", "description": "", "captured": None},
     {"name": "Esfinge", "killer": "Edipo", "description": "", "captured": None},
     {"name": "Dragón de la Cólquida", "killer": "-", "description": "", "captured": None},

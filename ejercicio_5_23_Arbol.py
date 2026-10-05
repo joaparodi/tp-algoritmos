@@ -20,6 +20,7 @@
 from super_heroes_data import superheroes
 from criaturas import Criaturas
 from tree import BinaryTree
+from list_ import List
 
 
 # class MarvelCharacter():
@@ -203,9 +204,101 @@ else:
     print("No se encontraron criaturas que no hayan sido derrotadas.")
     
 
-# g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe o dios que la capturo;
+# g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe o dios que la capturo
 
-    
-    
-    
-    
+print("\n--Listado de criaturas con su capturador---")
+arbol_criatura.mostrar_capturadores()
+
+
+
+# h. modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de Erimanto indicando que Heracles las atrapó;
+
+def buscar_y_modificar_captura(arbol_criatura : BinaryTree, nombre_criatura, capturador):
+    aux = arbol_criatura.search(nombre_criatura)
+    if aux is not None:
+        aux.other_values.captured = capturador
+        print(f"Se ha modificado la criatura '{nombre_criatura}' indicando que fue capturada por '{capturador}'.")
+    else:
+        print(f"No se encontró la criatura '{nombre_criatura}' en el árbol.")
+
+
+buscar_y_modificar_captura(arbol_criatura, "Cerbero", "Heracles")
+buscar_y_modificar_captura(arbol_criatura, "Toro de Creta", "Heracles")
+buscar_y_modificar_captura(arbol_criatura, "Cierva de Cerinea", "Heracles")
+buscar_y_modificar_captura(arbol_criatura, "Jabalí de Erimanto", "Heracles")
+
+print("\n--Listado de criaturas con su capturador después de las modificaciones---")
+arbol_criatura.mostrar_capturadores()
+
+
+# i. se debe permitir búsquedas por coincidencia;
+
+print("\n--Búsqueda por coincidencia---")
+coincidencias = arbol_criatura.buscar_por_coincidencia("bas")
+
+if coincidencias:
+    print(f"Se encontraron {len(coincidencias)} coincidencias:")
+    for criatura in coincidencias:
+        print(f"- {criatura.value}")
+else:
+    print("No se encontraron coincidencias en el árbol.")
+
+
+# j. eliminar al Basilisco y a las Sirenas;
+
+print("\n--Eliminando Basilisco y Sirenas---")
+arbol_criatura.delete_node("Basilisco")
+arbol_criatura.delete_node("Sirenas")
+
+arbol_criatura.inorden()
+
+
+# k. modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles derroto a varias;
+
+
+def modificar_y_agregar_capturador(arbol_criatura : BinaryTree, nombre_criatura, asesino):
+    aux = arbol_criatura.search(nombre_criatura)
+    if aux is not None:
+        aux.other_values.killer = asesino
+        print(f"Se ha modificado la criatura '{nombre_criatura}' indicando varias fueron derrotadas por '{asesino}'.")
+    else:
+        print(f"No se encontró la criatura '{nombre_criatura}' en el árbol.")
+
+
+
+print("\n--Modificando Aves del Estínfalo---")
+modificar_y_agregar_capturador(arbol_criatura, "Aves del Estínfalo", "Heracles")
+
+
+# l. modifique el nombre de la criatura Ladón por Dragón Ladón;
+
+
+def modificar_y_agregar_capturador(arbol_criatura , nombre_criatura):
+    aux = arbol_criatura.search(nombre_criatura)
+    if aux is not None:
+        aux.other_values.name = "Dragón Ladón"
+        aux.value = "Dragón Ladón"  # Actualizamos también el valor del nodo
+        print(f"Se ha modificado con exito el nombre de la criatura '{nombre_criatura}'a 'Dragón Ladón'.")
+    else:
+        print(f"No se encontró la criatura '{nombre_criatura}' en el árbol.")
+
+print("\n--Modificando Ladón a Dragón Ladón---")
+modificar_y_agregar_capturador(arbol_criatura, "Ladón")
+
+
+
+# m. realizar un listado por nivel del árbol;
+
+
+print("\n--- Listado por nivel del árbol ---")
+niveles = arbol_criatura.list_nivel()
+
+for i in range(len(niveles)):
+    print(f"Nivel {i}: {niveles[i]}")
+
+
+# n. muestre las criaturas capturadas por Heracles.
+
+print("\n--- Criaturas capturadas por Heracles ---")
+criaturas_capturadas_por_heracles = arbol_criatura.buscar_criaturas_por_capturador("Heracles")
+print(criaturas_capturadas_por_heracles)

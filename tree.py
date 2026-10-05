@@ -1,6 +1,7 @@
 
 from logging import root
 from platform import node
+import queue
 from typing import Any, Optional
 
 from queue import Queue
@@ -387,14 +388,14 @@ class BinaryTree():
     def criaturas_derrotadas_por(self, nombre_heroe) -> list:
         derrotadas = []
 
-        def buscar_derrotadas(root):
+        def buscar_killer(root):
             if root is not None:
                 if root.other_values.killer == nombre_heroe:
                     derrotadas.append(root.other_values.name)
-                buscar_derrotadas(root.left)
-                buscar_derrotadas(root.right)
+                buscar_killer(root.left)
+                buscar_killer(root.right)
 
-        buscar_derrotadas(self.root)
+        buscar_killer(self.root)
         return derrotadas
     
     def criaturas_no_derrotadas(self) -> list:
@@ -411,8 +412,88 @@ class BinaryTree():
         return no_derrotadas
 
 
+    def mostrar_capturadores(self):
+    
+        def __mostrar(root):
+            if root is not None:
+                # 1. Recorrer subárbol izquierdo
+                __mostrar(root.left)
+            
+                # 2. Imprimir el nodo actual y su campo capturada
+                capturado = root.other_values.captured if root.other_values and root.other_values.captured else "-"
+                print(f"Criatura: {root.value} --> Capturada por: {capturado}")
+            
+            # 3. Recorrer subárbol derecho
+                __mostrar(root.right)
+
+    # Iniciar el recorrido desde la raíz del árbol
+        __mostrar(self.root)
 
 
 
+    def buscar_por_coincidencia(self, termino_busqueda: str) -> list:
+        coincidencias = []
+        termino = termino_busqueda.lower().strip()
 
+        def __b_concidencia(root):
+            if root is not None:
+                # 1. Recorrer el hijo izquierdo si existe
+                if root.left is not None:
+                    __b_concidencia(root.left)
+            
+                # 2. Procesar el nodo actual: verificar coincidencia
+                if termino in str(root.value).lower():
+                    coincidencias.append(root)
+            
+                # 3. Recorrer el hijo derecho si existe
+                if root.right is not None:
+                    __b_concidencia(root.right)
+
+        # Iniciar el recorrido desde la raíz del árbol
+        __b_concidencia(self.root)
+        return coincidencias
+
+    def list_nivel(self) -> list:
+        niveles = []
+        if self.root is None:
+            return niveles
+
+        queue = Queue()
+        # Guardamos la tupla (nodo, nivel) y la prioridad 0
+        queue.arrive((self.root, 0), 0)
+
+        while queue.size() > 0:
+            # attention() devuelve [prioridad, (nodo, nivel)]
+            prioridad, (nodo_actual, nivel_actual) = queue.attention()
+
+            while len(niveles) <= nivel_actual:
+                niveles.append([])
+
+            niveles[nivel_actual].append(nodo_actual.value)
+
+            # Encolamos los hijos pasando (nodo, nivel + 1) y el nivel como prioridad
+            if nodo_actual.left is not None:
+                queue.arrive((nodo_actual.left, nivel_actual + 1), nivel_actual + 1)
+
+            if nodo_actual.right is not None:
+                queue.arrive((nodo_actual.right, nivel_actual + 1), nivel_actual + 1)
+
+        return niveles
+    
+    def buscar_criaturas_por_capturador(self, capturador: str = "Heracles") -> list:
+        def buscar_capturador(root):
+            capturadas = []
+            if root is not None:
+                if root.left is not None:
+                    capturadas += buscar_capturador(root.left)
+
+                if root.other_values.captured == capturador:
+                    capturadas.append(root.value)
+
+                if root.right is not None:
+                    capturadas += buscar_capturador(root.right)
+
+            return capturadas
+
+        return buscar_capturador(self.root)
     
