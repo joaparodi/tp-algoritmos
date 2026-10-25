@@ -27,9 +27,5 @@ class Queue:
             value = self.move_to_end()
             print(value)
     
-    def arrive(self, value: Any, priority: int) -> None:
-    
-        element = [priority, value]
-        self.__elements.append(element)
-        self.__elements.sort(key=lambda x: x[0])
+
         

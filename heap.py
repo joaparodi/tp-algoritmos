@@ -72,7 +72,7 @@ class Heap():
 
         return result
 
-h = Heap()
+# h = Heap()
 
 
 # vec = [7, 17, 4, 5, 7, 0, 1, 100, 44, 55] 
@@ -99,13 +99,13 @@ h = Heap()
 #     print(h.delete_element())
 
 
-h.arrive(3, 1)
-h.arrive(5, 1)
-h.arrive(100, 1)
-h.arrive(54, 1)
-h.arrive(70, 1)
-h.arrive(0, 2)
-h.arrive(-1, 3)
+# h.arrive(3, 1)
+# h.arrive(5, 1)
+# h.arrive(100, 1)
+# h.arrive(54, 1)
+# h.arrive(70, 1)
+# h.arrive(0, 2)
+# h.arrive(-1, 3)
 
 # h.add_element(5)
 # h.add_element(52)
@@ -116,9 +116,9 @@ h.arrive(-1, 3)
 # h.add_element(52)
 
 
-while h.size() > 0:
-    priority, value = h.attention()
-    print(value)
+# while h.size() > 0:
+#     priority, value = h.attention()
+#     print(value)
 
-print()
-print(h.elements)
+# print()
+# print(h.elements)

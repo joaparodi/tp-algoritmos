@@ -1,6 +1,7 @@
 
 from stack import Stack
 from queue import  Queue
+from heap import Heap
 
 
 
@@ -285,59 +286,56 @@ cola = Queue()
 # g. imprima todos los documentos de la cola de impresión
 
 
-cola = Queue()
+h = Heap()
 
 print()
 # a. Cargue tres documentos de empleados
-cola.arrive("Documento_Emp_1", 1)
-cola.arrive("Documento_Emp_2", 1)
-cola.arrive("Documento_Emp_3", 1)
+h.arrive("Documento_Emp_1", 1)
+h.arrive("Documento_Emp_2", 1)
+h.arrive("Documento_Emp_3", 1)
 
-cola.show()
 
 print()
 # b. Imprima el primer documento de la cola (mostrar el nombre)
-print("Imprimiendo:", cola.attention()[1]) # O el método que use tu TDA para obtener el dato
+print("Imprimiendo:", h.attention()[1]) # O el método que use tu TDA para obtener el dato
 
 print()
 # c. Cargue dos documentos del staff de TI
-cola.arrive("Documento_TI_1", 2)
-cola.arrive("Documento_TI_2", 2)
+h.arrive("Documento_TI_1", 2)
+h.arrive("Documento_TI_2", 2)
 
-cola.show()
 
 print()
 # d. Cargue un documento del gerente
-cola.arrive("Documento_Gerente_1", 3)
+h.arrive("Documento_Gerente_1", 3)
 
-cola.show()
+
 
 print()
 # e. Imprima los dos primeros documentos de la cola
-print(f"Imprimiendo:, {cola.attention()[1]}")
-print(f"Imprimiendo:, {cola.attention()[1]}")
+print(f"Imprimiendo:, {h.attention()[1]}")
+print(f"Imprimiendo:, {h.attention()[1]}")
 
-cola.show()
+
 
 print()
 # f. Cargue dos documentos de empleados y uno de gerente
-cola.arrive("Documento_Emp_4", 1)
-cola.arrive("Documento_Emp_5", 1)
-cola.arrive("Documento_Gerente_2", 3)
+h.arrive("Documento_Emp_4", 1)
+h.arrive("Documento_Emp_5", 1)
+h.arrive("Documento_Gerente_2", 3)
 
-cola.show()
 
 print()
 # g. imprima todos los documentos de la cola de impresión
 
-# while cola.size() > 0:
-#     priority, value = cola.attention()
-#     print(priority , value)
+while h.size() > 0:
+    priority, value = h.attention()
+    print(priority , value)
 
-# if cola.size() > 0 :
-#     print("quedan elementos en la cola")
-# else:
-#     print("esta vacia")
+if h.size() > 0 :
+    print("quedan elementos en la cola")
+else:
+    print("esta vacia")
 
 
 
