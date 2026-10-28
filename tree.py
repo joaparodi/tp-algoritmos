@@ -1,9 +1,5 @@
-
-from logging import root
-from platform import node
-import queue
 from typing import Any, Optional
-
+from heap import HeapMin
 from queue import Queue
 
 class Node():
@@ -98,6 +94,9 @@ class BinaryTree():
                         # input()
                         root.left, aux = __replace(root.left)
                         root.value = aux.value
+
+            root = self.auto_balance(root)
+            self.update_height(root)
             return root, x, other_value
 
         other_value = None
@@ -165,17 +164,14 @@ class BinaryTree():
     def inorden(self) -> None:
         
         def __inorden(root):
-            if root is not None:
-                if root.left is not None:
+            if root.left is not None:
                 # print(f'anda a la izquierda de {root.value}')
-                    __inorden(root.left)
+                __inorden(root.left)
             # print(f'procesa nodo actual')
-                print(root.value, root.height)
-                if root.right is not None:
+            print(root.value, root.height)
+            if root.right is not None:
                 # print(f'anda a a derecha de {root.value}')
-                    __inorden(root.right)
-            else :
-                return None
+                __inorden(root.right)
 
         __inorden(self.root)
     
@@ -219,11 +215,70 @@ class BinaryTree():
                     pendings.arrive(node.right)
                 # print(f'queue ')
                 # pendings.show()
-
                 # input()
 
+    def inorden_villain(self) -> None:
+        
+        def __inorden_villain(root):
+            if root.left is not None:
+                __inorden_villain(root.left)
+            if root.other_values['is_villain']:
+                print(root.value)
+            if root.right is not None:
+                __inorden_villain(root.right)
 
-#funciones usadas en el ejercicio 5
+    def postorden_hero(self):
+    
+        def __postorden_hero(root):
+            if root.right is not None:
+                __postorden_hero(root.right)
+            if not root.other_values['is_villain']:
+                print(root.value)
+            if root.left is not None:
+                __postorden_hero(root.left)
+
+        __postorden_hero(self.root)
+
+    def inorden_hero_star_with(self, prefix: str) -> None:
+        
+        def __inorden_hero_star_with(root, prefix):
+            if root.left is not None:
+                __inorden_hero_star_with(root.left, prefix)
+            if root.value.startswith(prefix) and not root.other_values['is_villain']:
+                print(root.value)
+            if root.right is not None:
+                __inorden_hero_star_with(root.right, prefix)
+
+        __inorden_hero_star_with(self.root, prefix)
+
+    def proxy_search(self, prefix: str) -> None:
+        
+        def __proxy_search(root, prefix):
+            if root.left is not None:
+                __proxy_search(root.left, prefix)
+            if prefix in root.value.lower():
+                print(root.value)
+            if root.right is not None:
+                __proxy_search(root.right, prefix)
+
+        __proxy_search(self.root, prefix)
+
+    def count_heroes(self) -> None:
+        def __count_heroes(root):
+            count = 0
+            if root is not None:
+                if root.left is not None:
+                    count += __count_heroes(root.left)
+                if not root.other_values['is_villain']:
+                    count += 1
+                if root.right is not None:
+                    count += __count_heroes(root.right)
+            return count
+
+        count = __count_heroes(self.root)
+        return count
+
+    #funciones usadas en el ejercicio 5
 
     def inorden_villain(self) -> None:
         
@@ -458,25 +513,25 @@ class BinaryTree():
         if self.root is None:
             return niveles
 
-        queue = Queue()
-        # Guardamos la tupla (nodo, nivel) y la prioridad 0
-        queue.arrive((self.root, 0), 0)
+        aux = HeapMin()
 
-        while queue.size() > 0:
-            # attention() devuelve [prioridad, (nodo, nivel)]
-            prioridad, (nodo_actual, nivel_actual) = queue.attention()
+        # Estructura en el heap: [prioridad, nivel, valor_del_nodo, referencia_izq, referencia_der]
+        
+        aux.arrive((self.root.value, self.root.left, self.root.right, 0), 0)
+
+        while aux.size() > 0:
+            prioridad, (valor, left, right, nivel_actual) = aux.attention()
 
             while len(niveles) <= nivel_actual:
                 niveles.append([])
 
-            niveles[nivel_actual].append(nodo_actual.value)
+            niveles[nivel_actual].append(valor)
 
-            # Encolamos los hijos pasando (nodo, nivel + 1) y el nivel como prioridad
-            if nodo_actual.left is not None:
-                queue.arrive((nodo_actual.left, nivel_actual + 1), nivel_actual + 1)
+            if left is not None:
+                aux.arrive((left.value, left.left, left.right, nivel_actual + 1), nivel_actual + 1)
 
-            if nodo_actual.right is not None:
-                queue.arrive((nodo_actual.right, nivel_actual + 1), nivel_actual + 1)
+            if right is not None:
+                aux.arrive((right.value, right.left, right.right, nivel_actual + 1), nivel_actual + 1)
 
         return niveles
     
