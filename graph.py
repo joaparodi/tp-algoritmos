@@ -1,6 +1,6 @@
 from typing import Any, Optional
 from list_ import List
-from queue_ import Queue
+from queue import Queue
 from stack import Stack
 from heap import HeapMin
 
@@ -283,34 +283,34 @@ g.add_edge(4, 'R', 'Z')
 # g.amplitude_show('C') 
 
 
-exist_path = g.exist_path('T', 'C')
+# exist_path = g.exist_path('T', 'C')
 
-if exist_path:
-    paths = g.dijkstra('T')
+# if exist_path:
+#     paths = g.dijkstra('T')
 
-    destination = 'Z'
+#     destination = 'Z'
 
-    peso_total = None
+#     peso_total = None
 
-    camino_completo = []
+#     camino_completo = []
 
-    while paths.size() > 0:
-        value = paths.pop()
-        if value[0] == destination:
-            if peso_total is None:
-                peso_total = value[1]
-            camino_completo.append(value[0])
-            destination = value[2]
-    camino_completo.reverse()
-    print(f'el camino mas corto es: {"-".join(camino_completo)} con un costo de {peso_total}')
+#     while paths.size() > 0:
+#         value = paths.pop()
+#         if value[0] == destination:
+#             if peso_total is None:
+#                 peso_total = value[1]
+#             camino_completo.append(value[0])
+#             destination = value[2]
+#     camino_completo.reverse()
+#     print(f'el camino mas corto es: {"-".join(camino_completo)} con un costo de {peso_total}')
 
-print()
-min_tree = g.kruskal('T')
+# print()
+# min_tree = g.kruskal('T')
 
-print(min_tree)
-peso_total = 0
-for edge in min_tree.split(';'):
-    origin, destination, weight = edge.split('-')
-    print(f'origin {origin} destination {destination}')
-    peso_total += int(weight)
-print(f'peso total: {peso_total}')
+# print(min_tree)
+# peso_total = 0
+# for edge in min_tree.split(';'):
+#     origin, destination, weight = edge.split('-')
+#     print(f'origin {origin} destination {destination}')
+#     peso_total += int(weight)
+# print(f'peso total: {peso_total}')
